@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract NFTMarket is ReentrancyGuard {
     using Counters for Counters.Counter;
-    Counters.Counter private _itemsIds;
+    Counters.Counter private _itemIds;
     Counters.Counter private _itemSold;
 
     address payable owner;
@@ -51,7 +51,7 @@ contract NFTMarket is ReentrancyGuard {
         require(price > 0,"Price must be at least 1 wei");
         require(msg.value == listingPrice,"Price must be equal to listing price");
 
-        _itemsIds.increment();
+        _itemIds.increment();
         uint256 itemId = _itemIds.current();
 
         idToMarketItem[itemId] = MarketItem(
@@ -84,7 +84,7 @@ contract NFTMarket is ReentrancyGuard {
         uint tokenId = idToMarketItem[itemId].tokenId;
         require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
-        idToMarketItem[itemId].seller.transfer(msg.sender);
+        idToMarketItem[itemId].seller.transfer(msg.value);
         IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
         idToMarketItem[itemId].owner = payable(msg.sender);
         _itemSold.increment();
@@ -92,8 +92,8 @@ contract NFTMarket is ReentrancyGuard {
     }
 
     function fetchMarketItems() public view returns(MarketItem[] memory){
-        uint itemCount = _itemsIds.current();
-        uint unsoldItemCount = _itemsIds.current() - _itemSold.current();
+        uint itemCount = _itemIds.current();
+        uint unsoldItemCount = _itemIds.current() - _itemSold.current();
         uint currentIndex = 0;
 
         MarketItem[] memory items = new MarketItem[](unsoldItemCount);
@@ -101,7 +101,7 @@ contract NFTMarket is ReentrancyGuard {
             if(idToMarketItem[i + 1].owner == address(0)) {
                 uint currentId = idToMarketItem[i + 1].itemId;
                 MarketItem storage currentItem = idToMarketItem[currentId];
-                items[currentIndex] = currentIteml;
+                items[currentIndex] = currentItem;
                 currentIndex += 1;
             }
         }
