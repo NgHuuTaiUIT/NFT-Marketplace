@@ -2,8 +2,10 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { NFT_ADDRESS, NFT_MARKET_ADDRESS } from "../config";
 import Web3Modal from "web3modal";
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+// import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
+// import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import NFT from "../utils/NFT.json";
+import Market from "../utils/NFTMarket.json";
 
 export default function MyAssets() {
   const [nfts, setNFTs] = useState([]);

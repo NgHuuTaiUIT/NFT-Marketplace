@@ -3,9 +3,13 @@ import { create as ipfsHttpClient } from "ipfs-http-client";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Web3Modal from "web3modal";
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import { NFT_ADDRESS, NFT_MARKET_ADDRESS } from "../config";
+
+// import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
+// import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+
+import NFT from "../utils/NFT.json";
+import Market from "../utils/NFTMarket.json";
 
 const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
 
