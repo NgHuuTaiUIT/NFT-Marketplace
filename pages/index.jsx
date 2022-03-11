@@ -17,7 +17,9 @@ export default function Home() {
   }, []);
 
   async function loadNFTs() {
-    const provider = new ethers.providers.JsonRpcProvider();
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://ropsten.infura.io/v3/4867b6206c3d4449af5910fe684c11ee"
+    );
     const tokenContract = new ethers.Contract(NFT_ADDRESS, NFT.abi, provider);
     const marketContract = new ethers.Contract(
       NFT_MARKET_ADDRESS,
