@@ -8,6 +8,7 @@ import axios from "axios";
 // import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 import NFT from "../utils/NFT.json";
 import Market from "../utils/NFTMarket.json";
+import Loading from "../components/loading";
 
 export default function MyAssets() {
   const [nfts, setNFTs] = useState([]);
@@ -55,7 +56,9 @@ export default function MyAssets() {
     return <h1 className="py-10 px-20 text-3xl">No assets owned</h1>;
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-between">
+      <Loading active={loadingState === "not-loaded"} />
+
       <div className="p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {nfts.map((nft, i) => (

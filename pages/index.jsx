@@ -10,6 +10,7 @@ import { NFT_ADDRESS, NFT_MARKET_ADDRESS } from "../config";
 
 import NFT from "../utils/NFT.json";
 import Market from "../utils/NFTMarket.json";
+import Loading from "../components/loading";
 
 export default function Home() {
   const [nfts, setNfts] = useState([]);
@@ -21,7 +22,7 @@ export default function Home() {
 
   async function loadNFTs() {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://ropsten.infura.io/v3/4867b6206c3d4449af5910fe684c11ee"
+      "https://polygon-mumbai.g.alchemy.com/v2/O_7K7gJnf8CbOdRFAv5ijdX1R9fOKtH-"
     );
     const tokenContract = new ethers.Contract(NFT_ADDRESS, NFT.abi, provider);
     const marketContract = new ethers.Contract(
@@ -78,16 +79,20 @@ export default function Home() {
     await transaction.wait();
     loadNFTs();
   }
+
   if (loadingState === "loaded" && !nfts.length)
     return <h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>;
 
   return (
     <div className="flex justify-center">
+      <Loading active={loadingState === "not-loaded"} />
       <div className="px-4 style={{ maxWidth: '1600px' }}">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {nfts.map((nft, i) => {
             return (
-              <div key={i} className="border shadow rounded-xl overflow-hidden">
+              <div
+                key={i}
+                className="border shadow rounded-xl overflow-hidden flex flex-col gap-1 justify-between ">
                 <img src={nft.image} style={{ height: "40%" }} />
                 <div className="p-4">
                   <p
@@ -99,9 +104,9 @@ export default function Home() {
                     <p className="text-gray-400">{nft.description}</p>
                   </div>
                 </div>
-                <div className="p-4 bg-black">
+                <div className="p-4 bg-black ">
                   <p className="text-2xl mb-4 font-bold text-white">
-                    {nft.price} ETH
+                    {nft.price} MATIC
                   </p>
                   <button
                     className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded "

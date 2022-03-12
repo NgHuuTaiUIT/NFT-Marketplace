@@ -9,6 +9,7 @@ import NFT from "../utils/NFT.json";
 import Market from "../utils/NFTMarket.json";
 
 import { NFT_ADDRESS, NFT_MARKET_ADDRESS } from "../config";
+import Loading from "../components/loading";
 
 export default function CreatorDashboard() {
   const [nfts, setNFTs] = useState([]);
@@ -57,11 +58,14 @@ export default function CreatorDashboard() {
     return <h1 className="py-10 px-20 text-3xl">No assets created</h1>;
   return (
     <div>
+      <Loading active={loadingState === "not-loaded"} />
       <div className="p-4">
         <h2 className="text-2xl py-2">Items Created</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {nfts.map((nft, i) => (
-            <div key={i} className="border shadow rounded-xl overflow-hidden">
+            <div
+              key={i}
+              className="border shadow rounded-xl overflow-hidden flex flex-col justify-between">
               <img src={nft.image} className="rounded" />
               <div className="p-4 bg-black">
                 <p className="text-2xl font-bold text-white">
