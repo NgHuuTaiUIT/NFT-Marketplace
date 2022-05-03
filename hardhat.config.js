@@ -21,7 +21,7 @@ module.exports = {
       accounts: []
     },
     mumbai: {
-      url: `https://polygon-mumbai.g.alchemy.com/v2/${MUMBAI_API_KEY}`,
+      url: `https://polygon-mumbai.g.alchemy.com/v2/O_7K7gJnf8CbOdRFAv5ijdX1R9fOKtH-`,
       accounts: [PRIVATE_KEY]
     },
     mainnet: {
