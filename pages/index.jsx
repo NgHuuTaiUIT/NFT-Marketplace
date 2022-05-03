@@ -5,8 +5,11 @@ import Web3Modal from "web3modal";
 
 import { NFT_ADDRESS, NFT_MARKET_ADDRESS } from "../config";
 
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+// import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
+// import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+
+import NFT from "../utils/NFT.json";
+import Market from "../utils/NFTMarket.json";
 
 export default function Home() {
   const [nfts, setNfts] = useState([]);
@@ -80,7 +83,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-center">
-      <div className="px-4">
+      <div className="px-4 style={{ maxWidth: '1600px' }}">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {nfts.map((nft, i) => {
             return (
@@ -98,7 +101,7 @@ export default function Home() {
                 </div>
                 <div className="p-4 bg-black">
                   <p className="text-2xl mb-4 font-bold text-white">
-                    {nft.price}
+                    {nft.price} ETH
                   </p>
                   <button
                     className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded "

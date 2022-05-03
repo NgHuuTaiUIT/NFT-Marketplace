@@ -2,8 +2,12 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { NFT_ADDRESS, NFT_MARKET_ADDRESS } from "../config";
 import Web3Modal from "web3modal";
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import axios from "axios";
+
+// import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
+// import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import NFT from "../utils/NFT.json";
+import Market from "../utils/NFTMarket.json";
 
 export default function MyAssets() {
   const [nfts, setNFTs] = useState([]);
@@ -22,7 +26,7 @@ export default function MyAssets() {
     const marketContract = new ethers.Contract(
       NFT_MARKET_ADDRESS,
       Market.abi,
-      provider
+      signer
     );
     const data = await marketContract.fetchMyNFTs();
 
@@ -36,9 +40,7 @@ export default function MyAssets() {
           tokenId: i.tokenId.toString(),
           seller: i.seller,
           owner: i.owner,
-          image: meta.data.image,
-          name: meta.data.name,
-          description: meta.data.description
+          image: meta.data.image
         };
 
         return item;

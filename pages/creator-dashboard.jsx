@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
 
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+// import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
+// import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
+import NFT from "../utils/NFT.json";
+import Market from "../utils/NFTMarket.json";
+
 import { NFT_ADDRESS, NFT_MARKET_ADDRESS } from "../config";
 
 export default function CreatorDashboard() {
